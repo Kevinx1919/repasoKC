@@ -1,11 +1,598 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Control de verciones</title>
+    <title>Servientrega - Líder en Mensajería y Logística</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
+            100% { transform: translateX(-50%) translateY(-50%) rotate(360deg); }
+        }
+
+        .hero-content {
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            padding: 5rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #2a5298;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .historia-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .historia-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .mision-vision {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 5rem 0;
+        }
+
+        .mv-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .mv-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .mv-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .mv-card h3 {
+            font-size: 2rem;
+            color: #2a5298;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .org-structure {
+            padding: 5rem 0;
+        }
+
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .org-level {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .org-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 200px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .org-box:hover {
+            transform: scale(1.05);
+        }
+
+        .org-box.ceo {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        .org-box.director {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+
+        .org-box.gerente {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+            color: #333;
+        }
+
+        .footer {
+            background: #2a5298;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .historia-content,
+            .mv-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .org-level {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">SERVIENTREGA</a>
+            <ul class="nav-menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#historia">Historia</a></li>
+                <li><a href="#mision-vision">Misión y Visión</a></li>
+                <li><a href="#estructura">Estructura</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>SERVIENTREGA</h1>
+            <p>Conectando Colombia y el mundo con confianza y rapidez</p>
+        </div>
+    </section>
+
+    <section id="historia" class="section">
+        <h2>Nuestra Historia</h2>
+        <div class="historia-content">
+            <div class="historia-text">
+                <p>Servientrega es una empresa colombiana líder en servicios de mensajería, paquetería y logística integral, fundada en 1982 por el empresario colombiano Carlos Eduardo Monroy.</p>
+                
+                <p>Desde sus inicios como una pequeña empresa de mensajería urbana en Bogotá, Servientrega ha crecido hasta convertirse en una de las compañías de logística más importantes de Colombia y América Latina, con presencia en más de 15 países.</p>
+                
+                <p>La empresa se ha caracterizado por su innovación constante, implementando tecnologías de vanguardia y desarrollando soluciones logísticas integrales que han revolucionado el sector en la región.</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>1982 - Fundación</h4>
+                    <p>Inicio de operaciones en Bogotá como empresa de mensajería urbana.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>1990 - Expansión Nacional</h4>
+                    <p>Cobertura a nivel nacional en Colombia con más de 50 ciudades.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>2000 - Internacionalización</h4>
+                    <p>Inicio de operaciones internacionales en países de América Latina.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>2010 - Transformación Digital</h4>
+                    <p>Implementación de plataformas tecnológicas avanzadas.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>2020 - Líder Regional</h4>
+                    <p>Consolidación como líder en logística integral en América Latina.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <span class="stat-number">40+</span>
+                <p>Años de experiencia</p>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">15+</span>
+                <p>Países con presencia</p>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">1,100+</span>
+                <p>Puntos de atención</p>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">12,000+</span>
+                <p>Colaboradores</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="mision-vision" class="mision-vision">
+        <div class="mv-container">
+            <div class="mv-card">
+                <h3>Misión</h3>
+                <p>Somos una empresa de logística integral que conecta personas, empresas y territorios a través de soluciones innovadoras de transporte, almacenamiento y distribución, generando valor para nuestros clientes, colaboradores, accionistas y la sociedad, con un compromiso firme hacia la sostenibilidad y el desarrollo del país.</p>
+            </div>
+            
+            <div class="mv-card">
+                <h3>Visión</h3>
+                <p>Ser la empresa líder en logística integral en América Latina, reconocida por nuestra excelencia operacional, innovación tecnológica, responsabilidad social y sostenibilidad ambiental, facilitando el crecimiento económico y social de los territorios donde operamos al 2030.</p>
+            </div>
+        </div>
+        
+        <div style="max-width: 1200px; margin: 3rem auto; padding: 0 2rem;">
+            <div class="mv-card">
+                <h3>Valores Corporativos</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                    <div style="text-align: center;">
+                        <h4 style="color: #667eea; margin-bottom: 0.5rem;">Confianza</h4>
+                        <p>Cumplimos nuestras promesas con transparencia y honestidad.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <h4 style="color: #667eea; margin-bottom: 0.5rem;">Innovación</h4>
+                        <p>Buscamos constantemente mejores formas de servir a nuestros clientes.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <h4 style="color: #667eea; margin-bottom: 0.5rem;">Excelencia</h4>
+                        <p>Nos esforzamos por superar las expectativas en cada servicio.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <h4 style="color: #667eea; margin-bottom: 0.5rem;">Sostenibilidad</h4>
+                        <p>Operamos de manera responsable con el medio ambiente y la sociedad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="estructura" class="section org-structure">
+        <h2>Estructura Organizacional</h2>
+        
+        <div class="org-chart">
+            <div class="org-level">
+                <div class="org-box ceo">
+                    <h4>Junta Directiva</h4>
+                    <p>Máximo órgano de gobierno corporativo</p>
+                </div>
+            </div>
+            
+            <div class="org-level">
+                <div class="org-box ceo">
+                    <h4>Presidencia</h4>
+                    <p>Dirección ejecutiva y estratégica</p>
+                </div>
+            </div>
+            
+            <div class="org-level">
+                <div class="org-box director">
+                    <h4>Vicepresidencia Comercial</h4>
+                    <p>Estrategia comercial y ventas</p>
+                </div>
+                <div class="org-box director">
+                    <h4>Vicepresidencia Operaciones</h4>
+                    <p>Gestión operativa y logística</p>
+                </div>
+                <div class="org-box director">
+                    <h4>Vicepresidencia Financiera</h4>
+                    <p>Gestión financiera y administrativa</p>
+                </div>
+            </div>
+            
+            <div class="org-level">
+                <div class="org-box gerente">
+                    <h4>Gerencia Nacional</h4>
+                    <p>Coordinación territorial</p>
+                </div>
+                <div class="org-box gerente">
+                    <h4>Gerencia Tecnología</h4>
+                    <p>Sistemas e innovación</p>
+                </div>
+                <div class="org-box gerente">
+                    <h4>Gerencia Talento Humano</h4>
+                    <p>Gestión del capital humano</p>
+                </div>
+                <div class="org-box gerente">
+                    <h4>Gerencia Internacional</h4>
+                    <p>Operaciones internacionales</p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 3rem; background: #f8f9fa; padding: 2rem; border-radius: 10px;">
+            <h3 style="text-align: center; color: #2a5298; margin-bottom: 1.5rem;">Principales Divisiones</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div style="text-align: center; padding: 1rem;">
+                    <h4 style="color: #667eea;">Mensajería Nacional</h4>
+                    <p>Servicios de paquetería y documentos en Colombia</p>
+                </div>
+                <div style="text-align: center; padding: 1rem;">
+                    <h4 style="color: #667eea;">Logística Internacional</h4>
+                    <p>Comercio exterior y envíos internacionales</p>
+                </div>
+                <div style="text-align: center; padding: 1rem;">
+                    <h4 style="color: #667eea;">Soluciones Empresariales</h4>
+                    <p>Logística integral para empresas</p>
+                </div>
+                <div style="text-align: center; padding: 1rem;">
+                    <h4 style="color: #667eea;">E-commerce</h4>
+                    <p>Soluciones para comercio electrónico</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <h3>SERVIENTREGA</h3>
+            <p>Conectando Colombia y el mundo con confianza y rapidez</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">© 2025 Servientrega. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(30, 60, 114, 0.95)';
+                navbar.style.backdropFilter = 'blur(10px)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, #1e3c72, #2a5298)';
+                navbar.style.backdropFilter = 'none';
+            }
+        });
+
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const finalNumber = stat.textContent;
+                        stat.textContent = '0';
+                        animateCounter(stat, finalNumber);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+
+        function animateCounter(element, target) {
+            const numericTarget = parseInt(target.replace(/\D/g, ''));
+            const suffix = target.replace(/\d/g, '');
+            let current = 0;
+            const increment = numericTarget / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= numericTarget) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current) + suffix;
+                }
+            }, 40);
+        }
+    </script>
 </body>
 </html>
