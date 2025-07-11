@@ -1,1 +1,3 @@
 El repaso de git haha
+se crea la rama, del colaborador y luego se edita uno o varios 
+archivos del repositorio
